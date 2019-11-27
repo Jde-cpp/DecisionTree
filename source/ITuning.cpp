@@ -5,7 +5,7 @@
 #include "IDataset.h"
 #include "IDecisionTree.h"
 #include "ParamResults.h"
-#include "../../framework/source/threading/Pool.h"
+#include "../../Framework/source/threading/Pool.h"
 
 #define var const auto
 
@@ -45,7 +45,7 @@ namespace Jde::AI::Dts::Tuning
 					GetDefaultLogger()->critical( "parameterSet.NumberOfLeavesValue()<2" );	
 					continue;
 				}*/
-				ASSRT_TR( previousExecutions.find(pParameterSet)==previousExecutions.end() );
+				ASSERT( previousExecutions.find(pParameterSet)==previousExecutions.end() );
 				var logSuffix = string("({}")+fmt::format( "/{})({}/{}){}", xs.size(), parameterSetIndex++, parameterSets.size(), string(logRemainder) );
 				
 				//var logSuffix = fmt::format( "({{}}/{})({}/{})({}/{})({}/{})", xs.size(), parameterSetIndex++, parameterSets.size(), parameterIndex, hasRangeCount, roundIndex, testCount );
@@ -226,7 +226,7 @@ namespace Jde::AI::Dts::Tuning
 #pragma region SaveTuning
 	IBoosterParamsPtr SaveTuning( const fs::path& saveStem, const PreviousExecutions& previousExecutions )noexcept(false)
 	{
-		ASSRT_GT( (uint)0, previousExecutions.size() );
+		ASSERT( previousExecutions.size()>(uint)0 );
 		multimap<ParamResults,IBoosterParamsPtr> sorted;
 		for( var& [pParams, results] : previousExecutions )
 		{
@@ -266,7 +266,7 @@ namespace Jde::AI::Dts::Tuning
 	PreviousExecutions ReadPrevious( IDecisionTree& decisionTree, const fs::path& csvFile )
 	{
 		std::ifstream is(csvFile);
-		ASSRT_TR(is.good());
+		ASSERT( is.good() );
 		string line;
 		getline(is, line);
 		var columnNameList = StringUtilities::Split(line);
@@ -296,7 +296,7 @@ namespace Jde::AI::Dts::Tuning
 			const ParamResults results(pParamsOther, stod(values[0]), stod(values[1]), stod(values[2]), stod(values[3]), pParamsOther->BestIteration());
 			var inserted = previousExecutions.emplace(pParamsOther, results).second;
 			if (!inserted)
-				CRITICAL("Duplicate parameter sets {}", pParamsOther->to_string()); //ASSRT_TR( inserted );
+				CRITICAL("Duplicate parameter sets {}", pParamsOther->to_string()); //ASSERT( inserted );
 		}
 		return previousExecutions;
 	}

@@ -237,7 +237,7 @@ namespace Jde::AI::Dts
 	template<typename T>
 	sp<Parameter> TParameter<T>::operator[]( uint index )const noexcept(false)
 	{
-		ASSRT_LT( Values.size(), index );
+		ASSERT( index<Values.size() );
 		return make_shared<TParameter<T>>( Name, Values[index], Delta, HasRange );
 	}
 

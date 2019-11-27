@@ -1,5 +1,5 @@
 #pragma once
-#include "../../framework/source/math/MathUtilities.h"
+#include "../../Framework/source/math/MathUtilities.h"
 
 namespace Jde::AI::Dts
 {

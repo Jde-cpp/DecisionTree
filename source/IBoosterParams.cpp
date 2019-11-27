@@ -193,13 +193,13 @@ namespace Jde::AI::Dts
 	bool IBoosterParams::operator<( const IBoosterParams& other )const noexcept
 	{
 		bool less = false;
-		ASSRT_EQ( _parameters.size(), other._parameters.size() );
+		ASSERT( _parameters.size()==other._parameters.size() );
 		for( var& [name, pParameter] : _parameters )
 		{
 			if( name==ThreadParamName() || name=="device" || name=="task" || name=="verbose" )
 				continue;
 			var pOther = other._parameters.find( name );
-			ASSRT_TR( pOther!=other._parameters.end() );
+			ASSERT( pOther!=other._parameters.end() );
 			//if( name=="bagging_fraction" && std::dynamic_pointer_cast<TParameter<double>>(pParameter)->Initial==.66 )
 			//	GetDefaultLogger()->trace( "name:  {}", pParameter->InitialString() );
 			var equal = pOther==other._parameters.end() || *pParameter==*pOther->second;
