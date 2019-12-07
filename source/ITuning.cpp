@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "ITuning.h"
 #include "IBooster.h"
 #include "IBoosterParams.h"

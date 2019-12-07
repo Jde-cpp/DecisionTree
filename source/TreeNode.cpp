@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "TreeNode.h"
 #define var const auto
 

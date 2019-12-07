@@ -8,16 +8,16 @@ CXXFLAGS_BASE = -c -g -pthread -fPIC -std=c++17 -Wall -Wno-unknown-pragmas -Wno-
 BIN_DIR_BASE:=../../bin/
 OUT_DIR_BASE := .obj/
 ifeq ($(DEBUG), 1)
-	OUT_DIR=$(OUT_DIR_BASE)debug
+	OUT_DIR=$(OUT_DIR_BASE)debug2
 	CXXFLAGS= $(CXXFLAGS_BASE) -O0 -I$(OUT_DIR) -fsanitize=address -fno-omit-frame-pointer
-	BIN_DIR=$(BIN_DIR_BASE)debug
+	BIN_DIR=$(BIN_DIR_BASE)debug2
 else
-	OUT_DIR=$(OUT_DIR_BASE)release
+	OUT_DIR=$(OUT_DIR_BASE)release2
 	CXXFLAGS= $(CXXFLAGS_BASE) -march=native -DNDEBUG -O3 -I$(OUT_DIR)
-	BIN_DIR=$(BIN_DIR_BASE)release
+	BIN_DIR=$(BIN_DIR_BASE)release2
 endif
 
-OUTPUT_FILE = libDts.so
+OUTPUT_FILE = libJde.Dts.so
 OUTPUT = $(BIN_DIR)/$(OUTPUT_FILE)
 LIBS = 
 #-lstdc++fs -lMy

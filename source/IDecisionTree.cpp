@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "IDecisionTree.h"
 #include "../../Framework/source/io/File.h"
 #include "../../Framework/source/Settings.h"

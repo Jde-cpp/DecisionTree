@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Tree.h"
 #include "IBooster.h"
 #include "IDecisionTree.h"

@@ -6,37 +6,37 @@
 		{
 			"label": "build",
 			"type": "shell",
-			"command": "clear;./build.sh 1 0",
+			"command": "clear;./buildc.sh",
 			"problemMatcher": { "base": "$gcc", "fileLocation": ["absolute"] },
 			"group": { "kind": "build", "isDefault": true }
 		},
 		{
 			"label": "rebuild",
 			"type": "shell",
-			"command": "clear;./build.sh 1 1",
+			"command": "clear;./buildc.sh asan 1 0",
 			"problemMatcher": { "base": "$gcc", "fileLocation": ["absolute"] }
 		},
 		{
 			"label": "rebuildAll",
 			"type": "shell",
-			"command": "clear;./build.sh 1 1",
+			"command": "clear;./buildc.sh asan 1 1",
 			"problemMatcher": { "base": "$gcc", "fileLocation": ["absolute"] }
 		},
 		{
 			"label": "make",
 			"type": "shell",
-			"command": "clear;make",
+			"command": "clear;cd .obj/asan;make",
 			"problemMatcher": { "base": "$gcc", "fileLocation": ["absolute"] }
 		},
 		{
 			"label": "clean",
 			"type": "shell",
-			"command": "clear;make clean; make clean DEBUG=0"
+			"command": "clear;cd .obj/asan;make clean;cd .obj/asan; make clean DEBUG=0"
 		},
 		{
 			"label": "release",
 			"type": "shell",
-			"command": "clear;./build.sh 0 1",
+			"command": "clear;./buildc.sh ReleaseWithDbgInfo",
 			"problemMatcher": { "base": "$gcc", "fileLocation": ["absolute"] },
 		}		
 	]

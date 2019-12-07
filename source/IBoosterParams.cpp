@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "IBoosterParams.h"
 
 #define var const auto
