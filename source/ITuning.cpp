@@ -41,12 +41,12 @@ namespace Jde::AI::Dts::Tuning
 					continue;
 				/*if( parameterSet.NumberOfLeavesValue()<2 )
 				{
-					GetDefaultLogger()->critical( "parameterSet.NumberOfLeavesValue()<2" );	
+					GetDefaultLogger()->critical( "parameterSet.NumberOfLeavesValue()<2" );
 					continue;
 				}*/
 				ASSERT( previousExecutions.find(pParameterSet)==previousExecutions.end() );
 				var logSuffix = string("({}")+fmt::format( "/{})({}/{}){}", xs.size(), parameterSetIndex++, parameterSets.size(), string(logRemainder) );
-				
+
 				//var logSuffix = fmt::format( "({{}}/{})({}/{})({}/{})({}/{})", xs.size(), parameterSetIndex++, parameterSets.size(), parameterIndex, hasRangeCount, roundIndex, testCount );
 				auto func = [&decisionTree, &previousExecutions, &previousExecutionsMutex, &ys, &xs, logSuffix, &pParameterSet, &foldCount, poolThreadCount]()
 				{
@@ -65,7 +65,7 @@ namespace Jde::AI::Dts::Tuning
 					std::unique_lock l( previousExecutionsMutex );
 					previousExecutions.emplace( pParameterSet, ParamResults(pParameterSet, maxIteration, groupFolds) );
 				};
-				pool.Submit( func );	
+				pool.Submit( func );
 			}
 		}
 		ASSERT( previousExecutions.size()>0 );
@@ -101,7 +101,7 @@ namespace Jde::AI::Dts::Tuning
 					continue;
 				if( parameter.Name=="min_sum_hessian_in_leaf" )
 				{
-					CRITICAL( "Trying to change min_sum_hessian_in_leaf {}", "none" );
+					CRITICAL( "Trying to change min_sum_hessian_in_leaf {}"sv, "none" );
 					continue;
 				}
 				auto pCurrentRun = pBestParams->Clone();
@@ -113,7 +113,7 @@ namespace Jde::AI::Dts::Tuning
 		}
 	 	return pBestParams;
 	}
-	
+
 	IBoosterParamsPtr TuneOne( IDecisionTree& decisionTree, vector<unique_ptr<Eigen::MatrixXf>>& xs, vector<Math::VPtr<>>& ys, const fs::path& saveStem, uint foldCount, string_view parameterName )noexcept(false)
 	{
 		var paramFile = fs::path( saveStem ).replace_extension( ".params" );
@@ -152,7 +152,7 @@ namespace Jde::AI::Dts::Tuning
 			var trainCount = rowCount - validationCount;
 			MatrixXf xTrain{ trainCount, columnCount }, xValidation{ validationCount, columnCount };
 			VectorXf yTrain{ trainCount }, yValidation{ validationCount };
-			
+
 			uint trainIndex = 0, validationIndex = 0;
 			uint maxTrainIndex = 0; uint maxValidationIndex = 0;
 			for( uint iRandom = 0; iRandom < rowCount; ++iRandom )//: pIndicies index, rnd_index in enumerate(rnd_indicies):
@@ -183,7 +183,7 @@ namespace Jde::AI::Dts::Tuning
 			// predictions = model.predict( x_validation, num_iteration=round_count )
 			// score = sklearn.metrics.mean_squared_error( np.array(y_validation).astype(np.float32), predictions, sample_weight=None, multioutput='uniform_average' ) #pylint: disable=E1101
 			results[foldIndex] = pBooster->BestScore();
-			DBG( "{} - {}.{}", pBooster->BestScore(), foldIndex, logSuffix );
+			DBG( "{} - {}.{}"sv, pBooster->BestScore(), foldIndex, logSuffix );
 			validationStart+=validationCount;
 		}
 		//fold_array = np.array(fold_results)
@@ -234,7 +234,7 @@ namespace Jde::AI::Dts::Tuning
 		}
 		var pTop = sorted.begin();
 		{
-			auto paramPath = saveStem; 
+			auto paramPath = saveStem;
 			std::ofstream os;
 			os.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 			os.open( paramPath.replace_extension(".params") );
@@ -295,7 +295,7 @@ namespace Jde::AI::Dts::Tuning
 			const ParamResults results(pParamsOther, stod(values[0]), stod(values[1]), stod(values[2]), stod(values[3]), pParamsOther->BestIteration());
 			var inserted = previousExecutions.emplace(pParamsOther, results).second;
 			if (!inserted)
-				CRITICAL("Duplicate parameter sets {}", pParamsOther->to_string()); //ASSERT( inserted );
+				CRITICAL("Duplicate parameter sets {}"sv, pParamsOther->to_string()); //ASSERT( inserted );
 		}
 		return previousExecutions;
 	}

@@ -36,7 +36,7 @@ namespace Jde::AI::Dts
 		auto fileName = BaseDir()/fmt::format( "{}_{}.params", ParamFilePrefix, metricSplit[metricSplit.size()-1] );
 		if( files.size() && featureLength<81 )
 		{
-			WARN( "Looking for featureLength={}", featureLength );
+			WARN( "Looking for featureLength={}"sv, featureLength );
 			auto pLowerBound = files.lower_bound( featureLength );
 			if( pLowerBound!=files.begin() && (pLowerBound==files.end() || pLowerBound->first!=featureLength) )
 				--pLowerBound;
@@ -61,7 +61,7 @@ namespace Jde::AI::Dts
 			}
 			catch( const Exception& exp )//no trees
 			{
-				WARN0( exp.what() );
+				WARN0( string(exp.what()) );
 			}
 		}
 		return pTree;
