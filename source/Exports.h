@@ -10,9 +10,9 @@
 		#define JDE_DTS_VISIBILITY __declspec( dllimport )
 		//#define _GLIBCXX_USE_NOEXCEPT noexcept
 		#if NDEBUG
-			#pragma comment(lib, "Jde.AI.Dts.lib")
+			#pragma comment(lib, "Jde.AI.DecisionTree.lib")
 		#else
-			#pragma comment(lib, "Jde.AI.Dts.lib")
+			#pragma comment(lib, "Jde.AI.DecisionTree.lib")
 		#endif
 	#else
 		#define JDE_DTS_VISIBILITY
