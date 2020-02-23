@@ -15,7 +15,7 @@
     <ProjectGuid>{32BB3284-A928-4216-AF99-A1054E64ABE2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Gbm</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -48,14 +48,14 @@
     <IncludePath>C:\code\libraries\LightGBM\include;C:\code\libraries\eigen-git-mirror;C:\code\libraries\json\include;C:\code\libraries\spdlog\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir).bin\$(Configuration)\</OutDir>
     <IntDir>.obj\$(Configuration)\</IntDir>
-    <TargetName>Jde.AI.Dts</TargetName>
+    <TargetName>Jde.AI.DecisionTree</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\code\libraries\LightGBM\include;C:\code\libraries\eigen-git-mirror;C:\code\libraries\json\include;C:\code\libraries\spdlog\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir).bin\$(Configuration)\</OutDir>
     <IntDir>.obj\$(Configuration)\</IntDir>
-    <TargetName>Jde.AI.Dts</TargetName>
+    <TargetName>Jde.AI.DecisionTree</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
