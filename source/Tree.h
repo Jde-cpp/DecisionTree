@@ -18,6 +18,7 @@ namespace Jde::AI::Dts
 	struct Tree : public ITree
 	{
 		Tree( sp<IBooster>& pBooster )noexcept(false);
+		virtual ~Tree()=default;
 		double Predict( const double* pFeatures )noexcept override;
 		const string_view* FeatureNames()const noexcept override{ return _features.data(); }
 		size_t FeatureCount()const noexcept override{ return _features.size(); }
@@ -39,7 +40,7 @@ namespace Jde::AI::Dts
 		size_t FeatureCount()const noexcept{return FeatureCnt;}
 		constexpr static size_t FeatureCnt{TFeatureCount};
 	};
-	template<size_t TFeatureCount> 
+	template<size_t TFeatureCount>
 	constexpr TreeBase<TFeatureCount>::TreeBase( const std::array<string_view,TFeatureCount>& features ):
 		Features{features}
 	{}

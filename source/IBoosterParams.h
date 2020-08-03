@@ -46,6 +46,7 @@ namespace Jde::AI::Dts
 		TParameter( string_view name, const T& initial, const T& delta, bool hasRange=true );
 		TParameter( string_view name, const T& initial, const T& delta, T minimum, T maximum, bool hasRange=true );
 		TParameter( const nlohmann::json& j )noexcept;
+		virtual ~TParameter()=default;
 		sp<Parameter> Clone()const noexcept override;
 		string InitialString()const override;
 		string DeltaString()const override;
@@ -72,7 +73,7 @@ namespace Jde::AI::Dts
 		virtual ~IBoosterParams(){}
 		virtual sp<IBoosterParams> Create()const noexcept=0;
 		virtual sp<IBoosterParams> Clone()const noexcept=0;
-		
+
 		virtual string to_string()const noexcept;
 		IBoosterParams& operator=( const IBoosterParams& );
 
@@ -143,7 +144,7 @@ namespace Jde::AI::Dts
 	TParameter<T>::TParameter( string_view name, const T& initial, const T& delta, bool hasRange ):
 		TParameter{ name, initial, delta, 0, std::numeric_limits<T>::max(), hasRange }
 	{}
-	
+
 	template<typename T>
 	TParameter<T>::TParameter( string_view name, const T& initial, const T& delta, T minimum, T maximum, bool hasRange ):
 		Parameter{ name, hasRange },
@@ -153,7 +154,7 @@ namespace Jde::AI::Dts
 		Maximum{ maximum },
 		Values{ initial }
 	{}
-	
+
 
 	template<typename T>
 	TParameter<T>::TParameter( const nlohmann::json& j )noexcept:
@@ -211,9 +212,9 @@ namespace Jde::AI::Dts
 	inline bool TParameter<string>::HaveDelta()const{ return false; }
 	template<typename T>
 	inline bool TParameter<T>::HaveDelta()const{ return Delta!=0; }
-	
+
 	template<typename T>
-	string TParameter<T>::InitialString()const 
+	string TParameter<T>::InitialString()const
 	{
 		//constexpr std::string_view typeName = Jde::GetTypeName<T>();
 		//GetDefaultLogger()->debug( typeName );
@@ -226,14 +227,14 @@ namespace Jde::AI::Dts
 	{
 		string delta;
 		if( HaveDelta() )
-		{		
+		{
 			std::ostringstream os;
 			os << Delta;
 			delta = os.str();
 		}
 		return delta;
 	}
-	
+
 	template<typename T>
 	sp<Parameter> TParameter<T>::operator[]( uint index )const noexcept(false)
 	{

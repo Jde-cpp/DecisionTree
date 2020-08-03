@@ -30,7 +30,7 @@ namespace Jde::AI::Dts::Tuning
 		if( executionCount==0 )
 			return make_tuple( pCurrentRun, false );
 
-		var poolThreadCount = 1;//TODO uncomment std::min<uint>( executionCount, std::max<uint>(std::thread::hardware_concurrency()-2,1) );
+		var poolThreadCount = std::min<uint>( executionCount, std::max<uint>(std::thread::hardware_concurrency()-2,1) );//1
 		{
 			Threading::Pool pool( poolThreadCount );
 			std::mutex previousExecutionsMutex;
