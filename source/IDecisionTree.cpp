@@ -26,7 +26,7 @@ namespace Jde::AI::Dts
 				//var metricSplit = StringUtilities::Split( metric, ':' );
 				if( stem.size()>3 && file.path().extension()==".params" && StringUtilities::StartsWith(stem, ParamFilePrefix) && std::isdigit(stem[3]) )
 				{
-					uint featureCount = StringUtilities::TryTo<uint>( stem.substr(3), 0 );
+					uint featureCount = StringUtilities::TryTo<uint>( stem.substr(3) ).value_or( 0 );
 					if( featureCount!=0 )
 						files.emplace( featureCount, file.path() );
 				}
